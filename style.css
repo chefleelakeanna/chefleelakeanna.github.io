@@ -390,14 +390,14 @@ body.menu-page {
   font-size: 3rem;
   color: #c2a57d;
   text-transform: uppercase;
-  letter-spacing: 4px;
+  letter-spacing: 1px;
   margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {
   .menu-header h1 {
     font-size: 2rem;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
   }
 }
 
