@@ -94,29 +94,60 @@ document.addEventListener('DOMContentLoaded', function () {
   // ========== MOBILE NAVIGATION ==========
   const hamburger = document.querySelector('.hamburger-menu');
   const mobileNav = document.querySelector('.mobile-nav');
+  const closeMenu = document.querySelector('.close-menu');
 
-  if (hamburger && mobileNav) {
+  if (hamburger && mobileNav && closeMenu) {
+    // Open menu
     hamburger.addEventListener('click', () => {
-      mobileNav.classList.toggle('active');
+      mobileNav.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
     });
 
+    // Close menu function
+    const closeMobileMenu = () => {
+      mobileNav.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+    };
+
+    // Close menu triggers
+    closeMenu.addEventListener('click', closeMobileMenu);
+    
+    // Click outside menu
     document.addEventListener('click', (e) => {
-      if (!hamburger.contains(e.target) && !mobileNav.contains(e.target)) {
-        mobileNav.classList.remove('active');
+      if (mobileNav.classList.contains('active') && 
+          !e.target.closest('.nav-links') && 
+          !e.target.closest('.hamburger-menu')) {
+        closeMobileMenu();
       }
     });
 
+    // Handle link clicks
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Handle current page link
+        if (link.getAttribute('href') === '#') {
+          e.preventDefault();
+        }
+        
+        // Close menu after click
+        closeMobileMenu();
+        
+        // Handle anchor links
+        if (link.getAttribute('href').startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    // Window resize handler
     window.addEventListener('resize', () => {
       if (window.innerWidth > 768) {
-        mobileNav.classList.remove('active');
+        closeMobileMenu();
       }
-    });
-
-    // Close mobile nav when a nav link is clicked
-    mobileNav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileNav.classList.remove('active');
-      });
     });
   }
 });
