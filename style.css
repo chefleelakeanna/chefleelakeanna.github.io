@@ -555,6 +555,32 @@ body.menu-page {
   display: none;
 }
 
+/* Back to Top Links */
+.back-to-top {
+  display: block;
+  text-align: right;
+  margin: 20px 15px 0;
+  color: #c2a57d;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.back-to-top:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+#top {
+  scroll-margin-top: 180px;
+}
+
+@media (max-width: 768px) {
+  #top {
+      scroll-margin-top: 100px;
+  }
+}
+
 
 /* ================= MOBILE STYLES ================= */
 @media (max-width: 768px) {
