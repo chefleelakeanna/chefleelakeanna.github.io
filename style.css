@@ -770,7 +770,9 @@ body.menu-page {
 }
 
 /* Hide mobile elements on desktop */
-.hamburger-menu,
-.mobile-nav {
-  display: none;
+@media (min-width: 769px) {
+  .hamburger-menu,
+  .mobile-nav {
+    display: none;
+  }
 }
