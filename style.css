@@ -1,0 +1,729 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font and Body */
+body, html {
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+  text-align: center;
+}
+
+body {
+  background-color: #000;
+  padding-top: 180px; /* Matches navbar height */
+  padding-bottom: 0;
+  line-height: 1.6;
+}
+
+/* ===== Fixed Navbar with Fade Effect ===== */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 80px;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 1);
+  backdrop-filter: blur(0px);
+  --navbar-opacity: 1;
+  opacity: var(--navbar-opacity);
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar--scrolled {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+}
+
+/* Fade all navbar content */
+.navbar > * {
+    opacity: calc(var(--navbar-opacity) * 0.9 + 0.1); /* Maintain minimum visibility */
+    transition: inherit;
+  }
+  
+  /* Keep text legible when semi-transparent */
+  .navbar a,
+  .navbar .restaurant-name {
+    text-shadow: 0 2px 4px rgba(0,0,0,calc(1 - var(--navbar-opacity)));
+  }
+
+/* Navbar Top Row */
+.navbar-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.logo {
+  max-width: 120px;
+  margin-right: 20px;
+}
+
+.restaurant-name {
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: white;
+  text-transform: uppercase;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.restaurant-name .bold {
+  font-weight: bold;
+}
+
+.restaurant-name .subtext {
+  font-size: 0.75em;
+  display: block;
+}
+
+.navbar-line {
+  border-bottom: 1px solid white;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Navbar Bottom Row */
+.navbar-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  transition: opacity 0.3s;
+}
+
+.nav-links a:hover {
+  opacity: 0.7;
+}
+
+.phone-number {
+  font-size: 1rem;
+  color: white;
+  white-space: nowrap;
+}
+
+.phone-number a {
+  color: white;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.phone-number a:hover {
+  opacity: 0.7;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: auto;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: url('pics/bg.jpg') no-repeat center center;
+  background-position: center 25%;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: -1;
+  transform: translateY(0);
+  will-change: transform;
+}
+
+.hero-overlay {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  padding-top: 10vh;
+  padding-bottom: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-logo {
+    max-width: min(60vw, 650px); /* Scales with viewport but never exceeds 700px */
+    min-width: 300px; /* Minimum size */
+    width: auto;
+    height: auto;
+    animation: zoomInLogo 2s ease-in-out;
+    margin-top: 50px;
+    filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.8));
+}
+
+@keyframes zoomInLogo {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+/* Button Styles */
+.button {
+    background: #c2a57d;
+    color: black;
+    padding: 0.8rem 1.5rem; /* Reduced from 1.2rem 2.5rem */
+    font-size: 1rem; /* Slightly smaller text */
+    transition: transform 0.3s, background 0.3s;
+    text-decoration: none !important;
+    border-radius: 4px; /* Slightly tighter corners */
+    white-space: nowrap; /* Prevent text wrapping */
+    display: inline-flex; /* Better vertical alignment */
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button:hover {
+    transform: translateY(-2px); /* Smaller lift effect */
+    background: #d4af37;
+  }
+
+/* Add media queries for finer control */
+@media (max-width: 1200px) {
+    .hero-logo {
+      max-width: 50vw;
+      margin-top: 40px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .hero-logo {
+      max-width: 40vw;
+      margin-top: 30px;
+    }
+    
+    .button {
+      font-size: 1.2rem;
+      padding: 1rem 2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-logo {
+      max-width: 30vw;
+      min-width: 250px;
+      margin-top: 20px;
+    }
+    
+    .button {
+      font-size: 1rem;
+      padding: 0.8rem 1.5rem;
+    }
+  }
+
+
+/* Content Sections */
+.info-section, .visit-section {
+  display: flex;
+  align-items: stretch;
+  gap: 40px;
+  padding: 80px 10%;
+  margin: 0;
+}
+
+.info-section {
+  background-color: #886f4a;
+}
+
+.visit-section {
+  background-color: #242424;
+  margin-bottom: 0 !important;
+}
+
+/* Hours Section */
+.hours {
+  background-color: black;
+  color: white;
+  padding: 60px 40px;
+  flex: 1;
+  margin-right: 40px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hours h2 {
+  color: #c2a57d;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+/* Visit Section */
+.visit-text {
+  background-color: black;
+  color: white;
+  padding: 60px 40px;
+  flex: 1;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.visit-text h2 {
+  color: #c2a57d;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+.visit-text a {
+  color: white;
+  text-decoration: underline;
+}
+
+/* Image Containers */
+.dish-image, .exterior-image {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  border-radius: 4px;
+  transform: translateZ(0);
+}
+
+.dish-image img, .exterior-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  display: block;
+}
+
+.dish-image:hover img, .exterior-image:hover img {
+  transform: scale(1.05);
+}
+
+/* Footer Section */
+.footer-parallax {
+  position: relative;
+  height: 75vh;
+  min-height: 400px;
+  overflow: hidden;
+  margin: 0;
+}
+
+.footer-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 150%;
+  background: url('pics/footer.jpg') no-repeat center top/cover;
+  transform: translateZ(0);
+}
+
+.site-footer {
+  position: relative;
+  z-index: 2;
+  background: #000;
+  margin-top: -1px;
+  padding: 3rem 2rem;
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.footer-content h3 {
+  color: #c2a57d;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.footer-content a {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-content a:hover {
+  text-decoration: underline;
+}
+
+.copyright {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+
+/* Menu Page Specific Styles */
+body.menu-page {
+  background-color: #242424;
+}
+
+.menu-header {
+  text-align: center;
+  padding: 40px 0;
+  background-color: #242424;
+}
+
+.menu-header h1 {
+  font-size: 3rem;
+  color: #c2a57d;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .menu-header h1 {
+    font-size: 2rem;
+    letter-spacing: 2px;
+  }
+}
+
+.menu-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 40px; /* Updated padding */
+  background-color: #242424;
+}
+
+.menu-category {
+  margin-bottom: 50px;
+}
+
+.menu-section-heading {
+  font-size: 2rem;
+  color: #c2a57d;
+  border-bottom: 2px solid #c2a57d;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  text-align: left;
+  margin-left: 15px; /* Creates consistent left margin */
+}
+
+.section-description {
+  color: #ccc;
+  margin-bottom: 25px;
+  font-style: italic;
+  font-size: 0.95rem;
+  text-align: left;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.menu-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px 50px;
+  margin: 0 15px; /* Add side margins */
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  position: relative;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.item-header::after {
+  content: "";
+  flex: 1;
+  border-bottom: 2px dotted #666;
+  margin: 0 10px;
+  order: 2; /* NEW - Ensures dots appear between name and price */
+}
+
+.item-name {
+  order: 1; /* Name comes first */
+  padding-right: 10px;
+  /* REMOVED background color */
+}
+
+.item-price {
+  order: 3; /* Price comes last */
+  padding-left: 10px;
+  text-align: right;
+  min-width: 80px; /* Prevents price wrapping */
+}
+
+.item-description {
+  color: #bbb;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  text-align: left;
+  margin-left: 0;
+  padding-right: 20px;
+}
+
+.spicy {
+  color: #ff4444;
+  font-size: 0.8em;
+  margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+  .menu-items {
+    grid-template-columns: 1fr;
+  }
+  
+  .menu-container {
+    padding: 30px 15px;
+  }
+}
+
+/* Table of Contents Styles */
+.menu-toc {
+  background-color: #333;
+  padding: 20px 0;
+  margin: 0 15px 40px;
+  border-radius: 4px;
+}
+
+.menu-toc ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.menu-toc a {
+  color: #c2a57d;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.menu-toc a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .menu-toc ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+}
+
+/* Price Disclaimer Styles */
+.price-disclaimer {
+  background-color: #242424;
+  padding: 25px 40px;
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.price-disclaimer p {
+  margin: 0;
+  line-height: 1.5;
+  border-top: 1px solid #333;
+  padding-top: 20px;
+}
+
+.floating-call {
+  display: none;
+}
+
+
+/* ================= MOBILE STYLES ================= */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Added for absolute positioning */
+    height: 100px; /* Set fixed navbar height */
+  }
+
+  /* Hide desktop elements */
+  .navbar-line,
+  .navbar-bottom-row,
+  .restaurant-name {
+    display: none;
+  }
+
+  /* Logo centering */
+  .navbar-top-row {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    max-width: 80px;
+    margin: 0 auto; /* Center logo horizontally */
+    position: relative;
+    top: 2px;
+    display: block;
+  }
+
+  /* Hamburger Menu */
+  .hamburger-menu {
+    display: block;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+  }
+
+  /* Mobile Menu Overlay */
+  .mobile-nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 80%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    transition: 0.3s;
+    z-index: 1000;
+    padding: 20px;
+    padding-top: 80px;
+  }
+
+  .mobile-nav.active {
+    left: 0;
+  }
+
+  .mobile-nav .nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .mobile-nav .nav-links a {
+    color: white;
+    font-size: 1.2rem;
+  }
+
+  /* Content Sections */
+  .info-section, 
+  .visit-section {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+
+  .hours,
+  .visit-text {
+    position: relative;
+    background: none;
+    padding: 20px;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+  }
+
+  .hours::before,
+  .visit-text::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: -1;
+  }
+
+  .dish-image img,
+  .exterior-image img {
+    position: relative;
+    z-index: -2;
+  }
+
+  /* Floating Call Button */
+  .floating-call {
+    display: flex;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;  /* Increased from 50px */
+    height: 60px; /* Increased from 50px */
+    background: #018afc;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4); /* Enhanced shadow */
+    z-index: 1000;
+  }
+
+  .phone-icon {
+    width: 30px;
+    height: 30px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    transition: transform 0.2s;
+  }
+
+  .floating-call a {
+    color: white; /* Changed from black for better contrast */
+    font-size: 1.8rem; /* Increased from 1.5rem */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Menu Adjustments */
+  .menu-toc ul {
+    flex-direction: column;
+  }
+
+  .menu-header h1 {
+    font-size: 2rem;
+  }
+
+  /* General Adjustments */
+  .button {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+  }
+
+  body {
+    padding-top: 90px; /* Reduced for mobile navbar height */
+  }
+}
+
+/* Hide mobile elements on desktop */
+.hamburger-menu,
+.mobile-nav {
+  display: none;
+}
