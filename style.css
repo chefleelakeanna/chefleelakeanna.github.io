@@ -182,14 +182,21 @@ body {
     min-width: 300px; /* Minimum size */
     width: auto;
     height: auto;
-    animation: zoomInLogo 2s ease-in-out;
+    /* animation: zoomInLogo 2s ease-in-out; */
     margin-top: 50px;
     filter: drop-shadow(2px 4px 10px rgba(0, 0, 0, 0.8));
+    opacity: 0;
+    transform: scale(0);
+}
+
+/* Logo animation trigger */
+.hero-logo.loaded {
+  animation: zoomInLogo 2s ease-in-out forwards;
 }
 
 @keyframes zoomInLogo {
-  0% { transform: scale(0); }
-  100% { transform: scale(1); }
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* Button Styles */

@@ -29,6 +29,39 @@ document.addEventListener('DOMContentLoaded', function () {
     elements.navbar.style.pointerEvents = opacity < 0.3 ? 'none' : 'auto';
   };
 
+  // ===== HERO LOGO LOAD HANDLER =====
+  const initLogoAnimation = () => {
+    const heroLogo = document.querySelector('.hero-logo');
+    const heroBg = document.querySelector('.hero-background');
+
+    if (!heroLogo || !heroBg) return;
+
+    // Extract background image URL
+    const bgUrl = getComputedStyle(heroBg).backgroundImage
+      .replace(/url\(["']?/, '')
+      .replace(/["']?\)/, '');
+
+    // Create image load promises
+    const promises = [
+      new Promise(resolve => {
+        heroLogo.complete ? resolve() : heroLogo.addEventListener('load', resolve);
+      }),
+      new Promise(resolve => {
+        const img = new Image();
+        img.src = bgUrl;
+        img.complete ? resolve() : img.addEventListener('load', resolve);
+      })
+    ];
+
+    // Trigger animation when both load
+    Promise.all(promises).then(() => {
+      heroLogo.classList.add('loaded');
+    });
+  };
+
+  // Initialize after DOM loads
+  initLogoAnimation();
+
   // ===== PARALLAX SYSTEM =====
   const updateParallax = (scrollPos) => {
     if (elements.parallax.hero) {
