@@ -64,6 +64,14 @@ body {
   margin-bottom: 10px;
 }
 
+.navbar-top-row a {
+  transition: opacity 0.3s;
+}
+
+.navbar-top-row a:hover {
+  opacity: 60%;
+}
+
 .logo {
   max-width: 120px;
   margin-right: 20px;
