@@ -362,6 +362,11 @@ body {
   font-size: 1.5rem;
 }
 
+.footer-content h3 a {
+  color: #c2a57d;
+  text-decoration: none;
+}
+
 .footer-content a {
   color: white;
   text-decoration: none;
